@@ -1,0 +1,78 @@
+<h2 mat-dialog-title>{{ data._id ? 'Editar Usuario' : 'Agregar Usuario' }}</h2>
+
+<div mat-dialog-content>
+    <form
+        [formGroup]="userForm"
+        (ngSubmit)="onSubmit()"
+        class="form"
+    >
+        <div>
+            <mat-form-field class="example-full-width">
+                <input
+                    matInput
+                    placeholder="Nombre"
+                    formControlName="Nombre"
+                >
+                <mat-error *ngIf="userForm.get('Nombre')?.hasError('required')">Nombre es requerido</mat-error>
+                <mat-error *ngIf="userForm.get('Nombre')?.hasError('pattern')">Solo puede contener letras</mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+                <input
+                    matInput
+                    placeholder="Correo Electrónico"
+                    formControlName="CorreoElectronico"
+                >
+                <mat-error *ngIf="userForm.get('CorreoElectronico')?.hasError('required')">Es requerido</mat-error>
+                <mat-error *ngIf="userForm.get('CorreoElectronico')?.hasError('email')">Correo no válido</mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+                <input
+                    matInput
+                    placeholder="Ocupación"
+                    formControlName="Ocupacion"
+                >
+                <mat-error *ngIf="userForm.get('Ocupacion')?.hasError('pattern')">Solo puede contener letras y espacios
+                </mat-error>
+            </mat-form-field>
+        </div>
+
+        <div>
+            <mat-form-field class="example-full-width">
+                <input
+                    matInput
+                    placeholder="Edad"
+                    formControlName="Edad"
+                >
+                <mat-error *ngIf="userForm.get('Edad')?.hasError('required')">Edad es requerida</mat-error>
+                <mat-error *ngIf="userForm.get('Edad')?.hasError('pattern')">Solo puede contener números y no puede
+                    superar 2 digitos</mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+                <input
+                    matInput
+                    placeholder="Teléfono"
+                    formControlName="Telefono"
+                    placeholder="+57 3256457812"
+                >
+                <mat-error *ngIf="userForm.get('Telefono')?.hasError('pattern')">Solo numero y simbolo + debe ir al
+                    inicio</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div mat-dialog-actions>
+            <button
+                mat-button
+                type="button"
+                (click)="onCancelClick()"
+            >Cancelar</button>
+            <button
+                mat-button
+                type="submit"
+                [disabled]="userForm.invalid"
+            >Guardar</button>
+        </div>
+    </form>
+</div>
